@@ -1,21 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import getItems from "../../service/ApiCall";
+import { getItemsCategory } from "../../service/ApiCall";
+import ItemList from "./ItemList";
 
-function ItemListContainer(Greeting) {
-  const styleItem = {
-    textAlign: "center",
-    padding: "40px",
-    margin: "59px",
-    borderRadius: "5px",
-    backgroundColor: "#E8DAEF",
-    color: "#AF7AC5",
-    textShadow: "5px 5px 5px #E8F6F3",
-  };
+export default function ItemListContainer() {
+  let [listaProductos, setListaProductos] = useState([]);
+  let categoryID = useParams().categoryID;
 
-  return (
-    <div style={styleItem}>
-      <h1>{Greeting.text}</h1>
-    </div>
-  );
+  useEffect(() => {
+    if (categoryID === undefined) {
+      getItems().then((respuesta) => {
+        setListaProductos(respuesta);
+      });
+    } else {
+      getItemsCategory(categoryID).then((respuestaFiltrada) => {
+        //console.log(respuestaFiltrada);
+        setListaProductos(respuestaFiltrada);
+      });
+    }
+  }, [categoryID]);
+
+  return <ItemList listaProductos={listaProductos} />;
 }
-
-export default ItemListContainer;
