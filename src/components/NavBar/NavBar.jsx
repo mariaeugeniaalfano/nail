@@ -4,7 +4,7 @@ import CardWidget from "./CardWidget/CardWidget";
 
 function NavBar() {
   const styleNavBar = {
-    backgroundColor: "rgba(000, 000, 000, 0.3)",
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
     padding: "10px",
     textAlign: "center",
     display: "flex",
@@ -17,7 +17,6 @@ function NavBar() {
 
   const styleLi = {
     display: "inline",
-    fontSize: "1.5rem",
     padding: "10px",
   };
 
@@ -27,6 +26,8 @@ function NavBar() {
     width: "50px",
     height: "50px",
   };
+
+
 
   return (
     <div style={styleNavBar}>
@@ -46,7 +47,7 @@ function NavBar() {
           <NavLink to="/category/press">Press-On Stick</NavLink>
         </li>
         <li style={styleLi}>
-          <NavLink to="/">Modo de uso</NavLink>
+          <NavLink to="#uso">Modo de uso</NavLink>
         </li>
       </ul>
       <CardWidget />

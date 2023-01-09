@@ -2,7 +2,7 @@ import React from "react";
 
 function CardWidget() {
   const styleCard = {
-    fontSize: "30px",
+    fontSize: "20px",
     padding: "15px",
   };
   return (

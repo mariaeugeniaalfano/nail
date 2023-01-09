@@ -3,7 +3,8 @@ import React from "react";
 const styleCentro = {
   alignItems: "center",
   textAlign: "center",
-  color: "white",
+  color: "black",
+  width:"300px"
 };
 
 export default function Item({ props }) {
