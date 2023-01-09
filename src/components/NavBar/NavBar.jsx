@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import CardWidget from "./CardWidget/CardWidget";
 
 function NavBar() {
@@ -37,16 +37,16 @@ function NavBar() {
       />
       <ul style={styleUl}>
         <li style={styleLi}>
-          <Link to="/">HOME</Link>
+          <NavLink to="/"> Home </NavLink>
         </li>
         <li style={styleLi}>
-          <Link to="/category/glue">Press-On Glue</Link>
+          <NavLink to="/category/glue">Press-On Glue</NavLink>
         </li>
         <li style={styleLi}>
-          <Link to="/category/press">Press-On Stick</Link>
+          <NavLink to="/category/press">Press-On Stick</NavLink>
         </li>
         <li style={styleLi}>
-          <Link to="/">Modo de uso</Link>
+          <NavLink to="/">Modo de uso</NavLink>
         </li>
       </ul>
       <CardWidget />

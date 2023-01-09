@@ -1,25 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import getItems from "../../service/ApiCall";
-import { getItemsCategory } from "../../service/ApiCall";
 import ItemList from "./ItemList";
+import { useParams } from "react-router-dom";
+
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  getFirestore,
+} from "firebase/firestore";
 
 export default function ItemListContainer() {
-  let [listaProductos, setListaProductos] = useState([]);
-  let categoryID = useParams().categoryID;
+  let { categoryID } = useParams();
+
+  const getItems = () => {
+    const db = getFirestore();
+    const itemCollection = categoryID
+      ? query(collection(db, "items"), where("category", "==", categoryID))
+      : collection(db, "items");
+
+    getDocs(itemCollection)
+      .then((querySnapshot) => {
+        setListaProductos(
+          querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+        );
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+  };
+
+  const [listaProductos, setListaProductos] = useState([]);
 
   useEffect(() => {
-    if (categoryID === undefined) {
-      getItems().then((respuesta) => {
-        setListaProductos(respuesta);
-      });
-    } else {
-      getItemsCategory(categoryID).then((respuestaFiltrada) => {
-        //console.log(respuestaFiltrada);
-        setListaProductos(respuestaFiltrada);
-      });
-    }
-  }, [categoryID]);
+    getItems();
+  }, []);
 
   return <ItemList listaProductos={listaProductos} />;
 }
