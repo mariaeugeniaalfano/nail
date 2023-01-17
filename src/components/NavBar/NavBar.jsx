@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import CardWidget from "./CardWidget/CardWidget";
+import CardWidget from "./../Icons/CardWidget";
 
 function NavBar() {
   const styleNavBar = {
@@ -49,8 +49,13 @@ function NavBar() {
         <li style={styleLi}>
           <NavLink to="#uso">Modo de uso</NavLink>
         </li>
+        <li style={styleLi}>
+          <NavLink to="/cart">
+            <CardWidget />
+          </NavLink>
+        </li>
       </ul>
-      <CardWidget />
+      
     </div>
   );
 }

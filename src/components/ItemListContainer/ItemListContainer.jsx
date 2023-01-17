@@ -26,6 +26,7 @@ export default function ItemListContainer() {
         );
       })
       .catch((error) => {
+        alert("Ocurrió un error al obtener los productos")
         console.log("Error getting documents: ", error);
       });
   };
@@ -34,7 +35,7 @@ export default function ItemListContainer() {
 
   useEffect(() => {
     getItems();
-  }, []);
+  }, [listaProductos]);
 
   return <ItemList listaProductos={listaProductos} />;
 }

@@ -22,15 +22,31 @@ export default function ItemDetail() {
         }
       })
       .catch((error) => {
+        alert("Ocurrió un error al obtener el producto")
         console.log("Error getting document:", error);
       });
   };
+
+  const AddCartProduct = (producto) => {
+    let productos = [];
+    let cartStorage = localStorage.getItem("cart");
+    if (cartStorage === null) {
+      productos.push(producto);
+      localStorage.setItem("cart", JSON.stringify(productos));
+    } else {
+      productos = JSON.parse(cartStorage);
+      productos.push(producto);
+      localStorage.setItem("cart", JSON.stringify(productos));
+    }
+    alert("Producto agregado al carrito")
+  };
+
 
   return (
     <div>
       <h1>Detalle del Producto</h1>
       <Item props={producto} />
-      <button> Comprar </button>
+      <button  onClick={() => AddCartProduct(producto)}> Agregar al carrito </button>
       <Link to={`/`}>Volver</Link>
     </div>
   );

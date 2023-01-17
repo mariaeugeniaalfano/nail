@@ -6,10 +6,7 @@ function CardWidget() {
     padding: "15px",
   };
   return (
-    <div style={styleCard}>
-      {" "}
-      <div>🛒</div>
-    </div>
+      <div style={styleCard}>🛒</div>
   );
 }
 
