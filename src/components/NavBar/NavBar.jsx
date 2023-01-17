@@ -4,7 +4,9 @@ import CardWidget from "./../Icons/CardWidget";
 
 function NavBar() {
   const styleNavBar = {
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    backgroundColor: "#d9dad6",
+    margin:"20px auto",
+    maxWidth:"1300px",
     padding: "10px",
     textAlign: "center",
     display: "flex",
@@ -21,7 +23,7 @@ function NavBar() {
   };
 
   const StyleImg = {
-    padding: "5px",
+    padding: "8px",
     borderRadius: "50%",
     width: "50px",
     height: "50px",

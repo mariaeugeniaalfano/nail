@@ -2,8 +2,9 @@ import React from "react";
 
 function CardWidget() {
   const styleCard = {
-    fontSize: "20px",
+    fontSize: "25px",
     padding: "15px",
+    display:"inline"
   };
   return (
       <div style={styleCard}>🛒</div>

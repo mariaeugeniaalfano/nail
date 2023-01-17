@@ -38,12 +38,6 @@
 }
 
 body {
-  background-image: url("https://i.ibb.co/bHWvfkR/pink.webp");
-  background-repeat: no-repeat;
-  margin: auto;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center center;
   background-color: white;
 }
 
