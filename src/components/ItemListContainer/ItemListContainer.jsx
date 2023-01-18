@@ -35,7 +35,7 @@ export default function ItemListContainer() {
 
   useEffect(() => {
     getItems();
-  }, [listaProductos]);
+  }, [categoryID]);
 
   return <ItemList listaProductos={listaProductos} />;
 }
