@@ -2,8 +2,9 @@ import React from "react";
 import Flex from "../Flex/Flex";
 
 const styleCentro = {
-  margin :"50px"
+  margin :"50px",
 };
+
 
 export default function Item({ props }) {
   return (
@@ -14,7 +15,7 @@ export default function Item({ props }) {
           <img src={props.img} alt={`Imagen`} />
         </figure>
       </div>
-      <div>
+      <div >
         <div>
           <p>{props.title}</p>
           <p>${props.price}</p>

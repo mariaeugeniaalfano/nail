@@ -10,6 +10,7 @@ function Flex(props) {
     padding: "10px",
     color: "black",
     maxWidth:"1300px",
+    margin:"auto",
   };
 
   return <div style={styleFlex}>{props.children}</div>;
