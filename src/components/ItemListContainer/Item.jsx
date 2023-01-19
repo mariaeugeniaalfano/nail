@@ -1,14 +1,13 @@
 import React from "react";
+import Flex from "../Flex/Flex";
 
 const styleCentro = {
-  alignItems: "center",
-  textAlign: "center",
-  color: "black",
-  width:"300px"
+  margin :"50px"
 };
 
 export default function Item({ props }) {
   return (
+    <Flex>
     <div style={styleCentro}>
       <div>
         <figure>
@@ -24,5 +23,6 @@ export default function Item({ props }) {
         <div>{props.description}</div>
       </div>
     </div>
+    </Flex>
   );
 }

@@ -3,14 +3,13 @@ import React from "react";
 function Flex(props) {
   const styleFlex = {
     display: "flex",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
     flexWrap: "wrap",
     alignItems: "center",
     textAlign: "center",
-    margin: "20px",
-    padding: "20px",
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    padding: "10px",
     color: "black",
+    maxWidth:"1300px",
   };
 
   return <div style={styleFlex}>{props.children}</div>;

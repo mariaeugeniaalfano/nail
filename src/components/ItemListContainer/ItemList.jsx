@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 export default function ItemList(props) {
 
     const boton={
-      backgroundColor: "rgba(255, 255, 255, 0.7)",
-      padding:"15px",
-      borderRadius:"100%",
+      borderRadius:"40%",
+      backgroundColor:"#d9dad6",
+      padding:"30px",
 
   }
   return (
