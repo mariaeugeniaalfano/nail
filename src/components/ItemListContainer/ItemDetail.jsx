@@ -1,29 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { redirect, useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { Link } from "react-router-dom";
+import { Context } from "../../context/Context";
 import Item from "./Item";
 import Flex from "../Flex/Flex";
-import { hover } from "@testing-library/user-event/dist/hover";
 
+const boton = {
+  display: "flex",
+  margin: "10px",
+  border: "none",
+  backgroundColor: "#d9dad6",
+  borderRadius: "20px",
+  padding: "10px",
+  justifyContent: "center",
+  maxWidth: "auto",
+  cursor: "pointer",
+};
+
+const centrado = {
+  margin: "auto",
+};
 
 export default function ItemDetail() {
+  const { productsCart, setProductsCart } = useContext(Context);
   const [producto, setProducto] = useState([]);
   let { itemID } = useParams();
-  const boton = {
-    display: "flex",
-    margin: "10px",
-    border: "none",
-    backgroundColor: "#d9dad6",
-    borderRadius: "20px",
-    padding: "10px",
-    justifyContent: "center",
-    maxWidth: "auto",
-  }
-
-  const centrado ={
-   margin:"auto"
-  }
 
   useEffect(() => {
     getItem(itemID);
@@ -39,33 +41,31 @@ export default function ItemDetail() {
         }
       })
       .catch((error) => {
-        alert("Ocurrió un error al obtener el producto")
+        alert("Ocurrió un error al obtener el producto");
         console.log("Error getting document:", error);
       });
   };
 
   const AddCartProduct = (producto) => {
-    let productos = [];
-    let cartStorage = localStorage.getItem("cart");
-    if (cartStorage === null) {
-      productos.push(producto);
-      localStorage.setItem("cart", JSON.stringify(productos));
-    } else {
-      productos = JSON.parse(cartStorage);
-      productos.push(producto);
-      localStorage.setItem("cart", JSON.stringify(productos));
+    if (productsCart.find((item) => item.id === producto.id)) {
+      alert("El producto ya se encuentra en el carrito");
+      return;
     }
-    alert("Producto agregado al carrito")
+    setProductsCart([...productsCart, producto]);
+    alert("Producto agregado al carrito");
   };
-
 
   return (
     <Flex>
-      <div >
-        <h1 style={centrado} >Detalle del Producto</h1>
+      <div>
+        <h1 style={centrado}>Detalle del Producto</h1>
         <Item style={centrado} props={producto} />
-        <button style={boton} onClick={() => AddCartProduct(producto)}> Agregar al carrito </button>
-        <Link style={boton} to={`/`}>Volver</Link>
+        <span style={boton} onClick={() => AddCartProduct(producto)}>
+          Agregar al carrito 🛒
+        </span>
+        <Link style={boton} to={`/`}>
+          Volver
+        </Link>
       </div>
     </Flex>
   );

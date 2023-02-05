@@ -1,31 +1,31 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { doc, setDoc, getFirestore } from "firebase/firestore";
 import Flex from "../Flex/Flex";
+import { Context } from "../../context/Context";
 
 const StyleImg = {
   padding: "5px",
   borderRadius: "50%",
   width: "100px",
   height: "100px",
-  margin:"30px"
+  margin: "30px",
 };
 
 const containerItem = {
-  display: 'flex',
-  fontSize: '8px',
-  color:"grey",
-  alignItems:"center"
-}
+  display: "flex",
+  fontSize: "8px",
+  color: "grey",
+  alignItems: "center",
+};
 
 const title = {
- fontSize:"2rem",
- display:"flex",
-justifyContent:"center"
-}
+  fontSize: "2rem",
+  display: "flex",
+  justifyContent: "center",
+};
 
-const estiloBoton ={
+const estiloBoton = {
   display: "flex",
   margin: "10px",
   border: "none",
@@ -34,67 +34,60 @@ const estiloBoton ={
   padding: "10px",
   justifyContent: "center",
   maxWidth: "auto",
-
-}
+  cursor: "pointer",
+};
 export const Cart = () => {
-  const [cartStorage, setCartStorage] = useState([]);
-
-  const readStorage = () => {
-    let cartStorage = localStorage.getItem("cart");
-    if (cartStorage !== null) {
-      return setCartStorage(JSON.parse(cartStorage));
-    }
-  };
-
-  useEffect(() => {
-    readStorage();
-  }, []);
+  const { productsCart, setProductsCart } = useContext(Context);
 
   const finishBuy = async () => {
     try {
       const db = getFirestore();
-
-
-      let cartStorage = localStorage.getItem("cart");
       await setDoc(doc(db, "compras", new Date().valueOf().toString()), {
-        cartStorage
+        productsCart,
       });
-      localStorage.removeItem("cart");
-      setCartStorage([]);
-      alert("Compra realizada con exito")
+      setProductsCart([]);
+      alert("Compra realizada con exito");
     } catch (error) {
-      alert("Error al realizar la compra")
+      alert("Error al realizar la compra");
       console.log("error al realizar la compra: " + error);
     }
-
-
-
   };
   return (
     <Flex>
-      <div >
-        <span style={title}>Mis carrito de compras:</span>
+      <div>
+        <span style={title}>Mi carrito de compras:</span>
 
-        {cartStorage.map((item) => (
-          <>
-            <div style={containerItem}>
-              <img style={StyleImg} src={item.img} alt="imagen"></img>
-              <h1>{item.title}</h1>
-              <h1>{item.category}</h1>
-              <h2>{item.price}</h2>
+        {productsCart.length > 0 ? (
+          productsCart.map((item) => (
+            <div key={item.id}>
+              <div style={containerItem}>
+                <img style={StyleImg} src={item.img} alt="imagen"></img>
+                <h1>{item.title}</h1>
+                <h1>{item.category}</h1>
+                <h2>{item.price}</h2>
+              </div>
+              <hr />
             </div>
-            <hr />
-          </>
+          ))
+        ) : (
+          <h1>No hay productos en el carrito</h1>
+        )}
+        <div>
+          {productsCart.length > 0 && (
+            <span
+              style={estiloBoton}
+              onClick={() => {
+                finishBuy();
+              }}
+            >
+              Comprar
+            </span>
+          )}
 
-        ))}
-        <Link style={estiloBoton} to={`/`}>Volver</Link>
-        <button style={estiloBoton}
-          onClick={() => {
-            finishBuy();
-          }}
-        >
-          Comprar
-        </button>
+          <Link to={`/`} style={estiloBoton}>
+            Volver
+          </Link>
+        </div>
       </div>
     </Flex>
   );

@@ -1,35 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import CardWidget from "./../Icons/CardWidget";
 
+import { Context } from "../../context/Context";
+
+const styleNavBar = {
+  backgroundColor: "#d9dad6",
+  margin: "20px auto",
+  maxWidth: "1300px",
+  padding: "10px",
+  textAlign: "center",
+  display: "flex",
+  justifyContent: "space-around",
+};
+
+const styleUl = {
+  listStyle: "none",
+};
+
+const styleLi = {
+  display: "inline",
+  padding: "10px",
+};
+
+const StyleImg = {
+  padding: "8px",
+  borderRadius: "50%",
+  width: "50px",
+  height: "50px",
+};
+
 function NavBar() {
-  const styleNavBar = {
-    backgroundColor: "#d9dad6",
-    margin:"20px auto",
-    maxWidth:"1300px",
-    padding: "10px",
-    textAlign: "center",
-    display: "flex",
-    justifyContent: "space-around",
-  };
-
-  const styleUl = {
-    listStyle: "none",
-  };
-
-  const styleLi = {
-    display: "inline",
-    padding: "10px",
-  };
-
-  const StyleImg = {
-    padding: "8px",
-    borderRadius: "50%",
-    width: "50px",
-    height: "50px",
-  };
-
-
+  const { productsCart } = useContext(Context);
 
   return (
     <div style={styleNavBar}>
@@ -55,9 +57,9 @@ function NavBar() {
           <NavLink to="/cart">
             <CardWidget />
           </NavLink>
+          <span>({productsCart.length})</span>
         </li>
       </ul>
-      
     </div>
   );
 }
